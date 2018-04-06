@@ -13,6 +13,13 @@ uploadPicBtn.addEventListener("click", function(){
 	uploadPicBtn.style.display = "none";
 })
 
+window.onclick = function(e){
+  if(e.target.matches(".modal-window") || e.target.matches(".close-btn-container") || e.target.matches(".modal-close-btn")){
+    editModalWindow.style.display = "none";
+    closeBtnContainerOne.style.display = "none";
+  }
+}
+
 /*--- Start of User Icon JS --*/
     var userIcon = document.getElementsByClassName("fa-user")[0],
         userList = document.getElementsByClassName("user-list")[0];
@@ -34,6 +41,8 @@ uploadPicBtn.addEventListener("click", function(){
         }
     });
 /*--- End of User Icon JS ---*/
+
+
 
 /*--- Check if Order is in Progress ---*/
 var orderInProgress = document.getElementById("order-in-progress"),
@@ -62,7 +71,7 @@ if(sameOrderInProgress){
 /*--- When user clicks order completed btn ---*/
 var currentOrderRow = document.getElementById("current-order-row");
 var currOrderTooltip = document.getElementById("curr-order-tooltip");
-var eraseOrderBtn = document.getElementById("erase-order-btn");
+var orderCompletedSubmit = document.getElementById("order-complete-submit");
 if(currentOrderRow){
   var entireOrdersSection = document.getElementsByClassName(".col-8")[0],
       currentOrderHeading = document.getElementById("current-order-heading"),
@@ -75,7 +84,7 @@ var previousOrdersHeading = document.getElementById("previous-orders-heading");
 var previousOrderRows = document.getElementsByClassName("previous-order-row");
 var prevOrderTooltips = document.getElementsByClassName("prev-order-tooltip");
 var previousOrderFooter;
-var test;
+var currOrder;
 
 /*--- Show Sideways Scroll Tooltip ---*/
 if(currentOrderRow){
@@ -100,22 +109,21 @@ if(previousOrderRows){
 }
 /*--- End of Sideways Scroll Tooltip ---*/
 
-if(orderCompletedBtn) {
-  orderCompletedBtn.addEventListener("click", function(){
-    test = 10;
-    removeCurrentOrder();
-  });
-}
-
 function removeCurrentOrder(){
   $("#current-order-outer").add("#current-order-heading").animate({
     height: "0px"
   }, 1000, function(){
     setTimeout(function(){
-      if(test == 5){
-        removeSubmitBtn.click();
-      } else {
-        eraseOrderBtn.click();
+      switch(true){
+        case (currOrder == "editing"):
+          editOrderSubmit.click();
+        break;
+        case (currOrder == "completed"):
+          orderCompletedSubmit.click();
+        break;
+        case (currOrder == "cancelled"):
+          cancelOrderSubmit.click();
+        break;
       }
       $(this).remove();
     }, 50)
@@ -126,40 +134,44 @@ function removeCurrentOrder(){
 
 /*--- When user clicks edit btn ---*/
 var editBtn = document.getElementById("edit-btn"),
-    editModalWindow = document.getElementById("modal-window"),
-    closeBtnContainer = document.getElementById("close-btn-container");
+    editModalWindow = document.getElementById("edit-modal-window"),
+    closeBtnContainerOne = document.getElementsByClassName("close-btn-container")[0];
 
 editBtn.addEventListener("click", function(){
   editModalWindow.style.display = "block";
-  closeBtnContainer.style.display = "block";
+  closeBtnContainerOne.style.display = "block";
 })
 /*--- end of user clicks edit btn ---*/
 
-window.onclick = function(e){
-  if(e.target.matches("#modal-window") || e.target.matches("#close-btn-container") || e.target.matches("#modal-close-btn")){
-    editModalWindow.style.display = "none";
-    closeBtnContainer.style.display = "none";
-  }
-}
-
-/*--- Set the Width of itemListInner based on number of items in the order row ---*/
 
 var ordersContainer = document.getElementById("all-orders-container");
 
-/*--- End of Setting width of itemListInner ---*/
-
-
 /*--- When user clicks 'Edit Order' Btn ---*/
-var editOrderBtn = document.getElementById("edit-order-btn");
-var removeSubmitBtn = document.getElementById("remove-submit");
-var hiddenLink = document.getElementById("hidden-link");
+var editOrderBtn = document.getElementById("edit-order-btn"),
+    editOrderSubmit = document.getElementById("edit-order-submit");
+
+var cancelOrderBtn = document.getElementById("cancel-order-btn"),
+    cancelOrderSubmit = document.getElementById("cancel-order-submit");
+
+
 if(editOrderBtn){
   editOrderBtn.addEventListener("click", function(){
-    test = 5;
+    currOrder = "editing";
     removeCurrentOrder();
   });
 }
-/*--- End of Edit Order Function ---*/
+if(orderCompletedBtn) {
+  orderCompletedBtn.addEventListener("click", function(){
+    currOrder = "completed";
+    removeCurrentOrder();
+  });
+}
+if(cancelOrderBtn){
+  cancelOrderBtn.addEventListener("click", function(){
+    currOrder = "cancelled";
+    removeCurrentOrder();
+  })
+}
 
 /*--- When user clicks 'Order Again' Btn ---*/
 var orderAgainBtns = document.getElementsByClassName("order-again-btn");
