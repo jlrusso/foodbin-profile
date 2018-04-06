@@ -44,7 +44,7 @@ nav {
     position: fixed;
     width: 100%;
     height: 50px;
-    background-color: rgba(229, 231, 233, 0.9);
+    background-color: rgb(229, 231, 233);
     box-shadow: 0 5px 5px rgba(0,0,0,0.3);
     z-index: 2;
 }
@@ -211,7 +211,7 @@ input[type="submit"]){
     width: 100%;
     height: 745px;
     padding: 60px 40px 40px;
-    background: url("../img/fresh-produce.jpeg");
+    background-color: var(--main-white-color);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center top;
@@ -229,7 +229,9 @@ input[type="submit"]){
 	width: 25%;
 	height: 100%;
 	padding: 10px;
+  border-radius: 5px;
 	background-color: var(--main-white-color);
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
 	margin-right: 10px;
 }
 
@@ -237,7 +239,7 @@ input[type="submit"]){
 	position: relative;
 	width: 95%;
 	height: 33%;
-  border-radius: 10px;
+  border-radius: 5px;
   overflow: hidden;
 	background: url("../img/user-icon.png");
 	background-size: cover;
@@ -392,7 +394,7 @@ input[type="submit"]){
 #curr-order-tooltip {
   opacity: 0;
   position: absolute;
-  top: 66.5%;
+  top: 67%;
   left: 3px;
   width: 245px;
 	background-color: rgba(0,0,0,0.7);
@@ -503,8 +505,9 @@ input[type="submit"]){
 	text-align: center;
 }
 
-#hidden-form,
-#hidden-link,
+#edit-order-form,
+#order-completed-form,
+#cancel-order-form,
 .remove-prev-form,
 .order-again-form {
   display: none;
@@ -550,8 +553,29 @@ input[type="submit"]){
 	color: var(--main-white-color);
 }
 
-#erase-order-form {
-  display: none;
+#cancel-order-btn {
+  width: 100%;
+	height: 40px;
+	background-color: var(--main-white-color);
+	color: #b31217;
+	border: 2px solid #b31217;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 0.2s;
+}
+#cancel-order-btn:hover {
+  background-color: #b31217;
+  color: var(--main-white-color);
+}
+
+#in-progress-span {
+  width: 100%;
+  line-height: 40px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.5);
+  color: var(--main-white-color);
 }
 
 .line-divider {
@@ -571,7 +595,7 @@ input[type="submit"]){
 } */
 
 /*--- Edit Modal ---*/
-#modal-window {
+.modal-window {
     display: none;
     position: absolute;
     top: 0;
@@ -583,7 +607,7 @@ input[type="submit"]){
     z-index: 5;
 }
 
-#close-btn-container {
+.close-btn-container {
     display: none;
     position: fixed;
     top: 60px;
@@ -593,7 +617,7 @@ input[type="submit"]){
     cursor: pointer;
 }
 
-#modal-close-btn {
+.modal-close-btn {
     position: absolute;
     top: 50%;
     right: 0;
@@ -605,7 +629,7 @@ input[type="submit"]){
     transform: rotate(45deg);
     transition: 0.3s;
 }
-#modal-close-btn::after {
+.modal-close-btn::after {
     content: "";
     position: absolute;
     top: 0;
@@ -616,8 +640,8 @@ input[type="submit"]){
     transform: rotate(90deg);
     transition: 0.3s;
 }
-#close-btn-container:hover #modal-close-btn,
-#close-btn-container:hover #modal-close-btn::after {
+.close-btn-container:hover .modal-close-btn,
+.close-btn-container:hover .modal-close-btn::after {
     background-color: rgb(34, 153, 84);
 }
 #modal-inner-container {
@@ -683,4 +707,19 @@ select:focus {
 
 select option {
 	color: black;
+}
+
+/* Messages Modal */
+#modal-body-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 500px;
+  height: 500px;
+  max-height: 500px;
+  overflow-y: auto;
+  background-color: var(--main-white-color);
+  border: 0;
+  border-radius: 4px;
 }
