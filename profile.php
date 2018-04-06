@@ -66,7 +66,7 @@
         </nav>
 		<div id="profile-area">
 			<div id="profile-inner">
-				<div class="col-4">
+				<div class="col-4" id="pic-and-info">
 					<div id="image-container">
             <?php
               if(isset($_SESSION['user_id'])){
@@ -86,6 +86,8 @@
                     }
                   }
                 }
+              } else {
+                echo "<input type='image' src='../img/user-icon.png'>";
               }
             ?>
 					</div>
@@ -100,11 +102,12 @@
 					<div class="user-info-container">
 						<div class="user-info-inner">
 							<?php
-								echo "<ul id='user-list'>
-										<li><span id='profile-name'>Name: </span> " . $_SESSION['user_first'] . " " .  $_SESSION['user_last'] . "</li>" .
-										"<li><span id='profile-email'>Email: </span>" . $_SESSION['user_email'] . "</li>" .
-										"<li id='user-city'><span id='profile-city'>City: </span>" . $_SESSION['user_city']. "</li>" .
-									"</ul>";
+								echo
+                  "<ul id='user-list'>
+  									<li><span id='profile-name'>Name: </span> " . $_SESSION['user_first'] . " " .  $_SESSION['user_last'] . "</li>" .
+  									"<li><span id='profile-email'>Email: </span>" . $_SESSION['user_email'] . "</li>" .
+  									"<li id='user-city'><span id='profile-city'>City: </span>" . $_SESSION['user_city']. "</li>" .
+  								"</ul>";
 							?>
 						</div>
 						<button id="edit-btn">Edit</button>
@@ -112,9 +115,6 @@
 				</div>
 				<div class="col-8">
             <h2 id="current-order-heading">Orders in Progress</h2>
-            <?php
-              //echo "<button id='hidden-link'>Go to Homepage</button>";
-            ?>
             <div id="current-order-outer">
               <div id="current-order-inner">
                 <div id="curr-order-tooltip">Shift + scroll to scroll sideways</div>
@@ -172,18 +172,33 @@
                     }
                     echo "</div>";
                     echo "
-                      <form action='includes/removeLastOrder.php' method='POST' id='hidden-form'>
+                      <form action='includes/editOrder.php' method='POST' id='edit-order-form'>
                         <input type='submit' name='submit' id='remove-submit'/>
                       </form>
+                      <form action='includes/orderCompleted.php' method='POST' id='order-completed-form'>
+                        <input type='submit' name='submit' id='order-complete-submit'/>
+                      </form>
+                      <form action='includes/cancelOrder.php' method='POST' id='cancel-order-form'>
+                        <input type='submit' name='submit' id='cancel-order-submit'/>
+                      </form>
+                    ";
+
+                    echo "
                       <div class='current-order-footer'>
                         <button id='edit-order-btn'>Edit Order</button>
-                        <button id='order-completed-btn'>Completed</button>
-                      </div>
-                      <form action='includes/eraseOrder.php' method='POST' id='erase-order-form'>
-                        <input type='submit' name='submit' value='Submit' id='erase-order-btn'/>
-                      </form>
-                      <div class='line-divider'></div>
-                    ";
+                      ";
+                      $currOrderStatus = $currData[$orderRow]['order_status'];
+                      $currOrderDelivered = $currData[$orderRow]['order_delivered'];
+                      if($currOrderStatus == 0){
+                        echo "<button id='cancel-order-btn'>Cancel</button>";
+                      } else if ($currOrderStatus == 1){
+                        if($currOrderDelivered == "No"){
+                          echo "<span id='in-progress-span'>In Progress..</span>";
+                        } else if ($currOrderDelivered == "Yes"){
+                          echo "<button id='order-completed-btn'>Completed</button>";
+                        }
+                      }
+                      echo "</div><div class='line-divider'></div>"; //end of current order footer
                   }
                 }
               ?>
@@ -342,9 +357,9 @@
 			</div>
 		</div>
 
-    <div id="modal-window">
-      <div id="close-btn-container">
-        <span id="modal-close-btn"></span>
+    <div class="modal-window" id="edit-modal-window">
+      <div class="close-btn-container">
+        <span class="modal-close-btn"></span>
       </div>
       <div id="modal-inner-container">
         <div id="modal-inner-content">
@@ -384,6 +399,8 @@
         </div>
       </div>
     </div>
+
+
 
 
 	</div>
