@@ -17,6 +17,13 @@ window.onclick = function(e){
   if(e.target.matches(".modal-window") || e.target.matches(".close-btn-container") || e.target.matches(".modal-close-btn")){
     editModalWindow.style.display = "none";
     closeBtnContainerOne.style.display = "none";
+    notificationsModal.style.display = "none";
+    closeBtnContainerTwo.style.display = "none";
+    conversationsModal.style.display = "none";
+    closeBtnContainerThree.style.display = "none";
+    for(let i = 0; i < messageBetweens.length; i++){
+      messageBetweens[i].classList.remove("toggle-messages-between");
+    }
   }
 }
 
@@ -42,6 +49,22 @@ window.onclick = function(e){
     });
 /*--- End of User Icon JS ---*/
 
+var notificationsBtn = document.getElementById("notifications-li"),
+    notificationsModal = document.getElementById("notifications-modal"),
+    closeBtnContainerTwo = document.getElementsByClassName("close-btn-container")[1];
+    notificationsBtn.addEventListener("click", function(){
+        notificationsModal.style.display = "block";
+        closeBtnContainerTwo.style.display = "block";
+    })
+
+var conversationsBtn = document.getElementById("conversations-li"),
+    conversationsModal = document.getElementById("conversations-modal"),
+    closeBtnContainerThree = document.getElementsByClassName("close-btn-container")[2];
+    conversationsBtn.addEventListener("click", function(){
+      conversationsModal.style.display = "block";
+      closeBtnContainerThree.style.display = "block";
+    })
+
 
 
 /*--- Check if Order is in Progress ---*/
@@ -60,13 +83,6 @@ if(editInProgress){
 }
 /*--- End of Edit Order Check ---*/
 
-/*--- Check if Same Order in Progress ---*/
-var sameOrderInProgress = document.getElementById("same-order-in-progress"),
-    sameOrderInProgressVal;
-if(sameOrderInProgress){
-  sameOrderInProgressVal = sameOrderInProgress.textContent;
-}
-/*--- Check if Same Order in Progress ---*/
 
 /*--- When user clicks order completed btn ---*/
 var currentOrderRow = document.getElementById("current-order-row");
@@ -208,3 +224,82 @@ function removeThisPrevOrder($order, $btn){
   })
 }
 /*--- End of Remove Order Function ---*/
+
+
+/*-- Using Ajax to get notifications --*/
+var notificationsContainer = document.getElementById("notifications-container"),
+    removeBtns = document.getElementsByClassName("close-box"),
+    denyBtns = document.getElementsByClassName("deny-btn"),
+    acceptBtns = document.getElementsByClassName("accept-btn"),
+    mailIcons = document.getElementsByClassName("mail-icon"),
+    denyOfferSubmit = document.getElementsByClassName("deny-offer-submit"),
+    removeNotiSubmit = document.getElementsByClassName("remove-noti-submit"),
+    acceptOfferSubmit = document.getElementsByClassName("accept-offer-submit"),
+    denyBtnsLen = denyBtns.length,
+    removeBtnsLen = removeBtns.length,
+    acceptBtnsLen = acceptBtns.length,
+    sendMessageForms = document.getElementsByClassName("send-message-form"),
+    closeNotiContainers = document.getElementsByClassName("close-noti-container"),
+    closeBarOnes = document.getElementsByClassName("close-bar-one"),
+    closeBarTwos = document.getElementsByClassName("close-bar-two");
+
+
+
+if(denyBtns){
+  for(let i = 0; i < denyBtnsLen; i++){
+    denyBtns[i].addEventListener("click", function(){
+      denyOfferSubmit[i].click();
+    })
+  }
+}
+
+if(acceptBtns){
+  for(let i = 0; i < acceptBtnsLen; i++){
+    acceptBtns[i].addEventListener("click", function(){
+      acceptOfferSubmit[i].click();
+    })
+  }
+}
+
+if(removeBtns){
+  for(let i = 0; i < removeBtnsLen; i++){
+    removeBtns[i].addEventListener("click", function(){
+      $(".message-container").eq(i).remove();
+      removeNotiSubmit[i].click();
+    })
+  }
+}
+
+if(mailIcons){
+  for(let i = 0; i < mailIcons.length; i++){
+    mailIcons[i].addEventListener("click", function(){
+      sendMessageForms[i].classList.toggle("toggle-send-message-form");
+      removeBtns[i].classList.toggle("toggle-close-box");
+      mailIcons[i].classList.toggle("toggle-move-up");
+      closeBarOnes[i].classList.toggle("toggle-move-up");
+      closeBarTwos[i].classList.toggle("toggle-move-up");
+    })
+  }
+}
+
+
+var logoutBtn = document.getElementById("logout-btn"),
+    logoutSubmit = document.getElementById("logout-submit");
+if(logoutBtn){
+  logoutBtn.addEventListener("click", function(){
+    logoutSubmit.click();
+  })
+}
+
+var viewBtns = document.getElementsByClassName("view-btn"),
+    viewConvos = document.getElementsByClassName("view-convo"),
+    messageBetweens = document.getElementsByClassName("messages-between");
+
+if(viewBtns){
+  for(let i = 0; i < viewBtns.length; i++){
+    viewBtns[i].addEventListener("click", function(){
+      viewConvos[i].classList.toggle("toggle-view-convo");
+      messageBetweens[i].classList.toggle("toggle-messages-between");
+    })
+  }
+}
