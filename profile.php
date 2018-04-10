@@ -17,53 +17,50 @@
 <body>
 	<div id="body-wrapper">
 		<nav>
-            <div id="nav-logo"><a href="foodbin.php"><b>Foodbin</b></a></div>
-             <div id="horizontal-nav">
-                <ul>
-                    <?php
-                      # - check if order is in progress
-                      if(isset($_SESSION['order-in-progress'])){
-                        if($_SESSION['order-in-progress'] == "yes"){
-                          echo "<span class='order-in-progress'>yes</span>";
-                        } else {
-                          echo "<span class='order-in-progress'>no</span>";
-                        }
-                      }
-                      if (isset($_SESSION['edit-in-progress'])){
-                        if($_SESSION['edit-in-progress'] == "yes"){
-                          echo "<span class='edit-in-progress'>yes</span>";
-                        } else {
-                          echo "<span class='edit-in-progress'>no</span>";
-                        }
-                      }
-                      if(isset($_SESSION['same-order-in-progress'])){
-                        if($_SESSION['same-order-in-progress'] == "yes"){
-                          echo "<span class='same-order-in-progress'>yes</span>";
-                        } else {
-                          echo "<span class='same-order-in-progress'>no</span>";
-                        }
-                      }
-                      # - end of order in progress check
+        <div id="nav-logo"><a href="foodbin.php"><b>Foodbin</b></a></div>
+         <div id="horizontal-nav">
+            <ul>
+                <?php
+                  # - check if order is in progress
+                  if(isset($_SESSION['order-in-progress'])){
+                    if($_SESSION['order-in-progress'] == "yes"){
+                      echo "<span id='order-in-progress'>yes</span>";
+                    } else {
+                      echo "<span id='order-in-progress'>no</span>";
+                    }
+                  }
+                  if (isset($_SESSION['edit-in-progress'])){
+                    if($_SESSION['edit-in-progress'] == "yes"){
+                      echo "<span id='edit-in-progress'>yes</span>";
+                    } else {
+                      echo "<span id='edit-in-progress'>no</span>";
+                    }
+                  }
+                  # - end of order in progress check
 
-                      if (isset($_SESSION['user_id'])){
-                        echo '<li><i class="fa fa-user"></i>
-                                <ul class="user-list">
-                                  <li><a href="profile.php" id="user">' . $_SESSION['user_username'] . '</a></li>
-                                  <li>
-                                      <form action="includes/logout-inc.php" method="POST">
-                                        <input type="submit" name="submit" value="logout" id="logout-btn"/>
-                                      </form>
-                                  </li>
-                                </ul>
-                              </li>';
-                      } else {
-                        echo '<li id="login-btn"><a href="login.php">Login</a></li>
-                              <li id="signup-btn"><a href="signup.php">Sign Up</a></li>';
-                      }
-                      ?>
-                </ul>
-            </div>
-        </nav>
+                  if (isset($_SESSION['user_id'])){
+                    echo '<li><i class="fa fa-user"></i>
+                            <ul class="user-list">
+                              <li id="signed-in-as">Signed in as: &nbsp; <b>' . $_SESSION["user_username"] . '</b></li>
+                              <li id="my-deliveries"><i class="fa fa-truck"></i> &nbsp;My deliveries</li>
+                              <li id="notifications-li"><i class="fa fa-bell-o"></i> &nbsp;Notifications</li>
+                              <li id="conversations-li"><i class="fa fa-envelope"></i> &nbsp;Conversations</li>
+                              <li id="logout-btn"><i class="fa fa-sign-out"></i>&nbsp; Logout</li>
+                            </ul>
+                          </li>
+                          <form action="includes/logout-inc.php" method="POST" id="logout-form">
+                            <input type="submit" name="submit" value="Logout" id="logout-submit"/>
+                          </form>
+                          ';
+                  } else {
+                    echo '<li id="login-btn"><a href="login.php">Login</a></li>
+                          <li id="signup-btn"><a href="signup.php">Sign Up</a></li>';
+                  }
+                  ?>
+            </ul>
+        </div>
+    </nav>
+
 		<div id="profile-area">
 			<div id="profile-inner">
 				<div class="col-4" id="pic-and-info">
@@ -119,7 +116,7 @@
               <div id="current-order-inner">
                 <div id="curr-order-tooltip">Shift + scroll to scroll sideways</div>
               <?php
-
+                $id = $_SESSION['user_id'];
                 $sql = "SELECT * FROM current_orders WHERE user_id=$id;";
                 $result = mysqli_query($conn, $sql);
                 $resultRows = mysqli_num_rows($result); //this is the number of rows returned
@@ -173,7 +170,7 @@
                     echo "</div>";
                     echo "
                       <form action='includes/editOrder.php' method='POST' id='edit-order-form'>
-                        <input type='submit' name='submit' id='remove-submit'/>
+                        <input type='submit' name='submit' id='edit-order-submit'/>
                       </form>
                       <form action='includes/orderCompleted.php' method='POST' id='order-completed-form'>
                         <input type='submit' name='submit' id='order-complete-submit'/>
@@ -191,6 +188,7 @@
                       $currOrderDelivered = $currData[$orderRow]['order_delivered'];
                       if($currOrderStatus == 0){
                         echo "<button id='cancel-order-btn'>Cancel</button>";
+                        echo "<button id='order-completed-btn'>Completed</button>";
                       } else if ($currOrderStatus == 1){
                         if($currOrderDelivered == "No"){
                           echo "<span id='in-progress-span'>In Progress..</span>";
@@ -273,12 +271,12 @@
                         <div class='previous-order-footer'>
                           <button class='order-again-btn'>Order Again</button>
                           <form action='includes/orderAgain.php' method='POST' class='order-again-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='order-again-submit-btn'/>
                           </form>
                           <button class='remove-order-btn'>Remove Order</button>
                           <form action='includes/removePrevOrder.php' method='POST' class='remove-prev-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='remove-order-submit-btn'/>
                           </form>
                         </div>
@@ -331,12 +329,12 @@
                         <div class='previous-order-footer'>
                           <button class='order-again-btn'>Order Again</button>
                           <form action='includes/orderAgain.php' method='POST' class='order-again-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='order-again-submit-btn'/>
                           </form>
                           <button class='remove-order-btn'>Remove Order</button>
                           <form action='includes/removePrevOrder.php' method='POST' class='remove-prev-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='remove-order-submit-btn'/>
                           </form>
                         </div>
@@ -400,8 +398,209 @@
       </div>
     </div>
 
+    <div class="modal-window" id="notifications-modal">
+      <div class="close-btn-container">
+        <span class="modal-close-btn"></span>
+      </div>
+      <div id="modal-body-wrapper">
+        <div id="modal-body">
+          <h2>My Notifications</h2>
+          <div id="notifications-container"></div>
+          <?php
+            $usersQuery = "SELECT * FROM users;";
+            $result = mysqli_query($conn, $usersQuery);
+            $numOfUsers = mysqli_num_rows($result);
+            $checkQuery = "SELECT * FROM notification_system WHERE recipient_id='$id' AND reg_msg !='Yes';";
+            $resultCheck = mysqli_query($conn, $checkQuery);
+            $checkRows = mysqli_num_rows($resultCheck);
+            if($checkRows < 1){
+              echo "<p id='no-notifications'>No Notifications</p>";
+            }
+            $selQuery = "SELECT * FROM notification_system WHERE recipient_id='$id' OR sender_id='$id';";
+            $result = mysqli_query($conn, $selQuery);
+            $resultRows = mysqli_num_rows($result);
+            $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+            for($x = 0; $x < ($numOfUsers + 1); $x++){
+              $newQuery = "SELECT * FROM notification_system WHERE recipient_id='$id' AND sender_id='$x' OR recipient_id='$x' AND sender_id='$id';";
+              $result = mysqli_query($conn, $newQuery);
+              $rr = mysqli_num_rows($result);
+              $newRow = mysqli_fetch_all($result, MYSQLI_ASSOC);
+              for($x2 = 0; $x2 < $rr; $x2++){
+                if($newRow[$x2]['accept_deny'] == "Yes" AND $newRow[$x2]['recipient_id'] == $id){
+                  echo "
+                    <div class='user-notification'>
+                      <p class='accept-deny-message'>" . $newRow[$x2]['message'] . "</p>
+                      <div class='accept-deny-container'>
+                        <button class='accept-btn'>Accept</button>
+                        <button class='deny-btn'>Deny</button>
+                      </div>
+                      <form class='deny-form' method='POST' action='includes/denyDeliveryOffer.php'>
+                        <input type='number' name='sender-id' value='" . $newRow[$x2]['sender_id'] . "'/>
+                        <input type='number' name='noti-id' value='" . $newRow[$x2]['noti_id'] . "' />
+                        <input type='submit' name='submit' class='deny-offer-submit'/>
+                      </form>
+                      <form class='accept-form' method='POST' action='includes/acceptDeliveryOffer.php'>
+                        <input type='number' name='sender-id' value='" . $newRow[$x2]['sender_id'] . "'/>
+                        <input type='number' name='noti-id' value='" . $newRow[$x2]['noti_id'] . "' />
+                        <input type='submit' name='submit' class='accept-offer-submit'/>
+                      </form>
+                    </div>
+                  ";
+                } else {
+                  if($newRow[$x2]['decision'] == "Yes" && $newRow[$x2]['recipient_id'] == $id){
+                    if($newRow[$x2]['accepted'] == "Yes"){
+                      echo "
+                       <div class='user-notification'>
+                          <p class='decision-message'>" . $newRow[$x2]['message'] . "</p>
+                          <span class='mail-icon' title='Send Message'><i class='fa fa-envelope'></i></span>
+                          <div class='close-noti-container'>
+                            <span class='close-bar-one'></span>
+                            <span class='close-bar-two'></span>
+                            <span class='close-box'></span>
+                          </div>
+                          <form class='send-message-form' method='POST' action='includes/sendMessage.php'>
+                            <input type='number' name='sender-id' class='hidden' value='" . $newRow[$x2]['sender_id'] . "'/>
+                            <div class='text-submit-container'>
+                              <input type='text' name='message' placeholder='Message' required='required'/>
+                              <input type='submit' name='submit' class='send-message-submit' value='Send'/>
+                            </div>
+                          </form>
+                          <form class='remove-noti-form' method='POST' action='includes/removeNoti.php'>
+                            <input type='number' name='noti-id' value='" . $newRow[$x2]['noti_id'] . "'/>
+                            <input type='submit' name='submit' class='remove-noti-submit'/>
+                          </form>
+                        </div>
+                      ";
+                    }else {
+                     echo "
+                     <div class='user-notification'>
+                       <p class='decision-message'>" . $newRow[$x2]['message'] . "</p>
+                       <div class='close-noti-container'>
+                         <span class='close-bar-one'></span>
+                         <span class='close-bar-two'></span>
+                         <span class='close-box'></span>
+                       </div>
+                       <form class='remove-noti-form' method='POST' action='includes/removeNoti.php'>
+                         <input type='number' name='noti-id' value='" . $newRow[$x2]['noti_id'] . "'/>
+                         <input type='submit' name='submit' class='remove-noti-submit'/>
+                       </form>
+                      </div>
+                     ";
+                   }
+                  }
+                }
+              }
+            }
+          ?>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-window" id="conversations-modal">
+      <div class="close-btn-container">
+        <span class="modal-close-btn"></span>
+      </div>
+      <div id="convo-body-wrapper">
+        <div id="convo-body">
+          <h2>My Conversations</h2>
+          <div id="conversations-container">
+            <?php
+            $userInvolved = "SELECT DISTINCT sender_id FROM notification_system WHERE recipient_id='$id' AND reg_msg='Yes';";
+            $result1 = mysqli_query($conn, $userInvolved);
+            if($result1){
+              $resultRows1 = mysqli_num_rows($result1);
+              $row1 = mysqli_fetch_all($result1, MYSQLI_ASSOC);
+              for($x = 0; $x < $resultRows1; $x++){
+                $otherId = $row1[$x]['sender_id'];
+                $usrQuery = "SELECT * FROM users WHERE id='$otherId';";
+                $result = mysqli_query($conn, $usrQuery);
+                $row2 = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                $otherFirst = ucfirst($row2[0]['user_first']);
+                $otherLast = ucfirst($row2[0]['user_last']);
+                $otherLastInitial = $otherLast[0] . ".";
+                $otherFull = $otherFirst . " " . $otherLastInitial;
+                echo "
+                  <div class='view-convo'>
+                     <p>Conversation with " . $otherFull . "</p>
+                     <button class='view-btn'>View</button>
+                  </div>
+                ";
+                $seeMessages = "SELECT * FROM `notification_system` WHERE reg_msg='Yes' AND sender_id='$id' AND recipient_id='$otherId' OR reg_msg='Yes' AND recipient_id='$id' AND sender_id='$otherId' ORDER BY noti_date;";
+                $resultMsgs = mysqli_query($conn, $seeMessages);
+                $messagesRowsNum = mysqli_num_rows($resultMsgs);
+                $messagesRows = mysqli_fetch_all($resultMsgs, MYSQLI_ASSOC);
+                echo "<div class='messages-between'>";
+                for($x2 = 0; $x2 < $messagesRowsNum; $x2++){
+                  $msg = $messagesRows[$x2]['message'];
+                  if($messagesRows[$x2]['recipient_id'] == $id){
+                    $senderId = $messagesRows[$x2]['sender_id'];
+                    echo "
+                      <div class='received-message-grid'>
+                        <p><span class='received-msg'>" . $msg . "</span></p>
+                        <div></div>
+                      </div>
+                    ";
+                  } else {
+                    $senderId = $messagesRows[$x2]['recipient_id'];
+                    echo "
+                      <div class='sent-message-grid'>
+                        <div></div>
+                        <p><span  class='sent-msg'>" . $msg . "</span></p>
+                      </div>
+                    ";
+                  }
+
+                }
+                echo "
+                  <form class='reply-msg-form' method='POST' action='includes/sendMessage.php'>
+                    <input type='number' class='hidden' name='sender-id' value='" . $senderId. "' />
+                    <input type='text' name='message' placeholder='Message' autocomplete='off'/>
+                    <input type='submit' name='submit' value='Send' />
+                  </form>
+                ";
+                echo "</div>"; //end of 'messages-between div'
+              }
+            } else {
+              echo "<p id='no-conversations'>No Conversations</p>";
+            }
 
 
+            // if($row1[0]['sender_id'] == $id){
+            //   $test = 5;
+            // } else if ($row1[0]['recipient_id'] == $id){
+            //   $test = 10;
+            // }
+            // if($test == 5){
+            //   $otherId = $row1[0]['recipient_id'];
+            //   $getOtherName = "SELECT * FROM users WHERE id='$otherId';";
+            //   $otherResult = mysqli_query($conn, $getOtherName);
+            //   $row2 = mysqli_fetch_all($otherResult, MYSQLI_ASSOC);
+            //   $otherFirst = $row2[0]['user_first'];
+            //   $otherLast = $row2[0]['user_last'];
+            //   $lastInitial = $otherLast[0] . ".";
+            //   $otherFull = $otherFirst . " " . $lastInitial;
+            //   echo "<p>Conversation with " . $otherFull . "</p>";
+            // } else if ($test == 10){
+            //   $otherId = $row1[0]['sender_id'];
+            //   $getOtherName = "SELECT * FROM users WHERE id='$otherId';";
+            //   $otherResult = mysqli_query($conn, $getOtherName);
+            //   $row2 = mysqli_fetch_all($otherResult, MYSQLI_ASSOC);
+            //   $otherFirst = $row2[0]['user_first'];
+            //   $otherLast = $row2[0]['user_last'];
+            //   $lastInitial = $otherLast[0] . ".";
+            //   $otherFull = $otherFirst . " " . $lastInitial;
+            //   echo "
+            //    <div class='view-convo'>
+            //      <p>Conversation with " . $otherFull . "</p>
+            //      <button class='view-btn'>View</button>
+            //    </div>
+            //   ";
+            // }
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
 
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
