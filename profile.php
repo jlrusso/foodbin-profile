@@ -15,58 +15,69 @@
 	<title>Profile | Foodbin</title>
 </head>
 <body>
+  <?php
+    if(!isset($_SESSION['user_id'])){
+      header("Location: ../foodbin/foodbin.php?not-logged-in");
+      exit();
+    }
+  ?>
 	<div id="body-wrapper">
 		<nav>
-            <div id="nav-logo"><a href="foodbin.php"><b>Foodbin</b></a></div>
-             <div id="horizontal-nav">
-                <ul>
-                    <?php
-                      # - check if order is in progress
-                      if(isset($_SESSION['order-in-progress'])){
-                        if($_SESSION['order-in-progress'] == "yes"){
-                          echo "<span class='order-in-progress'>yes</span>";
-                        } else {
-                          echo "<span class='order-in-progress'>no</span>";
-                        }
-                      }
-                      if (isset($_SESSION['edit-in-progress'])){
-                        if($_SESSION['edit-in-progress'] == "yes"){
-                          echo "<span class='edit-in-progress'>yes</span>";
-                        } else {
-                          echo "<span class='edit-in-progress'>no</span>";
-                        }
-                      }
-                      if(isset($_SESSION['same-order-in-progress'])){
-                        if($_SESSION['same-order-in-progress'] == "yes"){
-                          echo "<span class='same-order-in-progress'>yes</span>";
-                        } else {
-                          echo "<span class='same-order-in-progress'>no</span>";
-                        }
-                      }
-                      # - end of order in progress check
+        <div id="brand-logo"><a href="foodbin.php"><b>Foodbin</b></a></div>
+         <div id="horizontal-nav">
+            <ul>
+                <?php
+                  # - check if order is in progress
+                  if(isset($_SESSION['order-in-progress'])){
+                    if($_SESSION['order-in-progress'] == "yes"){
+                      echo "<span id='order-in-progress'>yes</span>";
+                    } else {
+                      echo "<span id='order-in-progress'>no</span>";
+                    }
+                  }
+                  if (isset($_SESSION['edit-in-progress'])){
+                    if($_SESSION['edit-in-progress'] == "yes"){
+                      echo "<span id='edit-in-progress'>yes</span>";
+                    } else {
+                      echo "<span id='edit-in-progress'>no</span>";
+                    }
+                  }
+                  if (isset($_SESSION['same-order-in-progress'])){
+                    if($_SESSION['same-order-in-progress'] == "yes"){
+                      echo "<span id='same-order-in-progress'>yes</span>";
+                    } else {
+                      echo "<span id='same-order-in-progress'>no</span>";
+                    }
+                  }
+                  # - end of order in progress check
 
-                      if (isset($_SESSION['user_id'])){
-                        echo '<li><i class="fa fa-user"></i>
-                                <ul class="user-list">
-                                  <li><a href="profile.php" id="user">' . $_SESSION['user_username'] . '</a></li>
-                                  <li>
-                                      <form action="includes/logout-inc.php" method="POST">
-                                        <input type="submit" name="submit" value="logout" id="logout-btn"/>
-                                      </form>
-                                  </li>
-                                </ul>
-                              </li>';
-                      } else {
-                        echo '<li id="login-btn"><a href="login.php">Login</a></li>
-                              <li id="signup-btn"><a href="signup.php">Sign Up</a></li>';
-                      }
-                      ?>
-                </ul>
-            </div>
-        </nav>
+                  if (isset($_SESSION['user_id'])){
+                    echo '<li><i class="fa fa-user"></i>
+                            <ul class="user-list">
+                              <li id="signed-in-as">Signed in as: &nbsp; <b>' . $_SESSION["user_username"] . '</b></li>
+                              <li id="go-home-btn"><i class="fa fa-home"></i> &nbsp;Home<a href="foodbin.php" id="home-anchor"></a></li>
+                              <li id="my-deliveries"><i class="fa fa-truck"></i> &nbsp;My Deliveries</li>
+                              <li id="my-notifications-btn"><i class="fa fa-bell-o"></i> &nbsp;Notifications  <span id="noti-badge">!</span></li>
+                              <li id="my-conversations-btn"><i class="fa fa-comments-o"></i> &nbsp;Conversations <span id="convo-badge">!</span></li>
+                              <li id="logout-btn"><i class="fa fa-sign-out"></i>&nbsp; Logout</li>
+                            </ul>
+                          </li>
+                          <form action="includes/logout-inc.php" method="POST" id="logout-form">
+                            <input type="submit" name="submit" value="Logout" id="logout-submit"/>
+                          </form>
+                          ';
+                  } else {
+                    echo '<li id="login-btn"><a href="login.php">Login</a></li>
+                          <li id="signup-btn"><a href="signup.php">Sign Up</a></li>';
+                  }
+                  ?>
+            </ul>
+        </div>
+    </nav>
+
 		<div id="profile-area">
 			<div id="profile-inner">
-				<div class="col-4">
+				<div class="col-4" id="pic-and-info">
 					<div id="image-container">
             <?php
               if(isset($_SESSION['user_id'])){
@@ -86,6 +97,8 @@
                     }
                   }
                 }
+              } else {
+                echo "<input type='image' src='../img/user-icon.png'>";
               }
             ?>
 					</div>
@@ -100,26 +113,24 @@
 					<div class="user-info-container">
 						<div class="user-info-inner">
 							<?php
-								echo "<ul id='user-list'>
-										<li><span id='profile-name'>Name: </span> " . $_SESSION['user_first'] . " " .  $_SESSION['user_last'] . "</li>" .
-										"<li><span id='profile-email'>Email: </span>" . $_SESSION['user_email'] . "</li>" .
-										"<li id='user-city'><span id='profile-city'>City: </span>" . $_SESSION['user_city']. "</li>" .
-									"</ul>";
+								echo
+                  "<ul id='user-list'>
+  									<li><span id='profile-name'>Name: </span> " . $_SESSION['user_first'] . " " .  $_SESSION['user_last'] . "</li>" .
+  									"<li><span id='profile-email'>Email: </span>" . $_SESSION['user_email'] . "</li>" .
+  									"<li id='user-city'><span id='profile-city'>City: </span>" . $_SESSION['user_city']. "</li>" .
+  								"</ul>";
 							?>
 						</div>
-						<button id="edit-btn">Edit</button>
 					</div>
+          <button id="edit-btn">Edit</button>
 				</div>
 				<div class="col-8">
             <h2 id="current-order-heading">Orders in Progress</h2>
-            <?php
-              //echo "<button id='hidden-link'>Go to Homepage</button>";
-            ?>
             <div id="current-order-outer">
               <div id="current-order-inner">
                 <div id="curr-order-tooltip">Shift + scroll to scroll sideways</div>
               <?php
-
+                $id = $_SESSION['user_id'];
                 $sql = "SELECT * FROM current_orders WHERE user_id=$id;";
                 $result = mysqli_query($conn, $sql);
                 $resultRows = mysqli_num_rows($result); //this is the number of rows returned
@@ -172,18 +183,28 @@
                     }
                     echo "</div>";
                     echo "
-                      <form action='includes/removeLastOrder.php' method='POST' id='hidden-form'>
-                        <input type='submit' name='submit' id='remove-submit'/>
+                      <form action='includes/editOrder.php' method='POST' id='edit-order-form'>
+                        <input type='submit' name='submit' id='edit-order-submit'/>
                       </form>
-                      <div class='current-order-footer'>
-                        <button id='edit-order-btn'>Edit Order</button>
-                        <button id='order-completed-btn'>Completed</button>
-                      </div>
-                      <form action='includes/eraseOrder.php' method='POST' id='erase-order-form'>
-                        <input type='submit' name='submit' value='Submit' id='erase-order-btn'/>
+                      <form action='includes/orderCompleted.php' method='POST' id='order-completed-form'>
+                        <input type='submit' name='submit' id='order-complete-submit'/>
                       </form>
-                      <div class='line-divider'></div>
+                      <form action='includes/cancelOrder.php' method='POST' id='cancel-order-form'>
+                        <input type='submit' name='submit' id='cancel-order-submit'/>
+                      </form>
                     ";
+                    echo "<div class='current-order-footer'>";
+                      $currOrderStatus = $currData[$orderRow]['order_status'];
+                      if($currOrderStatus == 1){
+                        echo "<button id='edit-order-btn'>Edit Order</button>";
+                        echo "<button id='cancel-order-btn'>Cancel</button>";
+                      } else if ($currOrderStatus == 2){
+                          echo "<button id='cancel-order-btn'>Cancel</button>";
+                          echo "<span id='in-progress-span'>In Process..</span>";
+                      } else if ($currOrderStatus == 3){
+                          echo "<button id='order-completed-btn'>Completed</button>";
+                      }
+                      echo "</div><div class='line-divider'></div>"; //end of current order footer
                   }
                 }
               ?>
@@ -258,12 +279,12 @@
                         <div class='previous-order-footer'>
                           <button class='order-again-btn'>Order Again</button>
                           <form action='includes/orderAgain.php' method='POST' class='order-again-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='order-again-submit-btn'/>
                           </form>
                           <button class='remove-order-btn'>Remove Order</button>
                           <form action='includes/removePrevOrder.php' method='POST' class='remove-prev-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='remove-order-submit-btn'/>
                           </form>
                         </div>
@@ -316,12 +337,12 @@
                         <div class='previous-order-footer'>
                           <button class='order-again-btn'>Order Again</button>
                           <form action='includes/orderAgain.php' method='POST' class='order-again-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='order-again-submit-btn'/>
                           </form>
                           <button class='remove-order-btn'>Remove Order</button>
                           <form action='includes/removePrevOrder.php' method='POST' class='remove-prev-form'>
-                            <input type='number' name='num' value='" . $prevData[$orderRow]['order_id'] . "'/>
+                            <input type='number' name='num' value='" . $prevData[$orderRow]['id'] . "'/>
                             <input type='submit' name='submit' class='remove-order-submit-btn'/>
                           </form>
                         </div>
@@ -342,9 +363,10 @@
 			</div>
 		</div>
 
-    <div id="modal-window">
-      <div id="close-btn-container">
-        <span id="modal-close-btn"></span>
+    <div class="modal-window" id="edit-modal-window">
+      <div class="close-btn-container">
+        <span class="window-bar-one"></span>
+        <span class="window-bar-two"></span>
       </div>
       <div id="modal-inner-container">
         <div id="modal-inner-content">
@@ -385,6 +407,53 @@
       </div>
     </div>
 
+    <div class="modal-window" id="notifications-modal">
+      <div class="close-btn-container">
+        <span class="window-bar-one"></span>
+        <span class="window-bar-two"></span>
+      </div>
+      <div id="modal-body-wrapper">
+        <div id="modal-body">
+          <h2>My Notifications</h2>
+          <?php
+            include_once "includes/myNotifications.php";
+          ?>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal-window" id="conversations-modal">
+      <div class="close-btn-container">
+        <span class="window-bar-one"></span>
+        <span class="window-bar-two"></span>
+      </div>
+      <div id="convo-body-wrapper">
+        <div id="convo-body">
+          <h2>My Conversations</h2>
+          <div id="conversations-container">
+            <?php
+              include_once "includes/myConversations.php";
+            ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-window" id="my-deliveries-modal">
+      <div class='close-btn-container'>
+        <span class="window-bar-one"></span>
+        <span class="window-bar-two"></span>
+      </div>
+      <div id="my-deliveries-container">
+        <h2>My Deliveries</h2>
+        <?php
+          $_POST['from'] = "home";
+          include_once "includes/myDeliveries.php";
+        ?>
+      </div>
+    </div>
 
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
