@@ -1,5 +1,4 @@
 :root {
-    --main-green-color: rgb(0,128,255);
     --main-blue-color: rgb(0,128,255);
     --main-white-color: #fff;
 }
@@ -90,8 +89,8 @@ nav {
 }
 
 #horizontal-nav a:hover:not(#user) {
-    background-color: var(--main-green-color);
-    color: var(--main-green-color);
+    background-color: var(--main-blue-color);
+    color: var(--main-blue-color);
 }
 
 .fa-user {
@@ -99,7 +98,6 @@ nav {
     display: block;
     padding: 8px 20px 7.5px;
     color: rgb(0,128,255);
-    border: 2px solid transparent;
     border-radius: 5px;
     transition: 0.2s;
     font-size: 1.1rem;
@@ -109,22 +107,17 @@ nav {
     transition: 0.2s;
 }
 
-.fa-user:hover {
-    border-color: var(--main-green-color);
-    color: var(--main-green-color);
-}
-
 #user {
   display: block;
   padding: 5px;
   border-radius: 4px 4px 0 0;
   font-size: 1rem;
-  color: var(--main-green-color);
+  color: var(--main-blue-color);
 }
 
 #user:hover {
   border-radius: 4px 4px 0 0;
-  background-color: var(--main-green-color);
+  background-color: var(--main-blue-color);
   color: white;
 }
 
@@ -288,10 +281,10 @@ input[type="submit"]){
 	transform: translateX(-50%);
 	width: 150px;
 	background-color: var(--main-white-color);
-	border: 2px solid var(--main-green-color);
+	border: 2px solid var(--main-blue-color);
 	border-radius: 4px;
 	padding: 5px;
-	color: var(--main-green-color);
+	color: var(--main-blue-color);
 	font-weight: bold;
 	font-size: 1rem;
 	cursor: pointer;
@@ -299,7 +292,7 @@ input[type="submit"]){
 }
 
 #change-pic-btn:hover {
-	background-color: var(--main-green-color);
+	background-color: var(--main-blue-color);
 	color: var(--main-white-color);
 }
 
@@ -314,10 +307,10 @@ input[type="submit"]){
 	transform: translateX(-50%);
 	width: 150px;
 	background-color: var(--main-white-color);
-	border: 2px solid var(--main-green-color);
+	border: 2px solid var(--main-blue-color);
 	border-radius: 4px;
 	padding: 5px;
-	color: var(--main-green-color);
+	color: var(--main-blue-color);
 	font-weight: bold;
 	font-size: 1rem;
 	cursor: pointer;
@@ -325,7 +318,7 @@ input[type="submit"]){
 }
 
 #upload-pic-btn:hover {
-	background-color: var(--main-green-color);
+	background-color: var(--main-blue-color);
 	color: var(--main-white-color);
 }
 
@@ -362,9 +355,9 @@ input[type="submit"]){
   left: 50%;
   transform: translateX(-50%);
 	background-color: var(--main-white-color);
-	border: 2px solid var(--main-green-color);
+	border: 2px solid var(--main-blue-color);
 	border-radius: 4px;
-	color: var(--main-green-color);
+	color: var(--main-blue-color);
 	font-weight: bold;
 	font-size: 1rem;
 	padding: 10px 0;
@@ -373,7 +366,7 @@ input[type="submit"]){
 }
 
 #edit-btn:hover {
-	background-color: var(--main-green-color);
+	background-color: var(--main-blue-color);
 	color: var(--main-white-color);
 }
 
@@ -408,12 +401,12 @@ input[type="submit"]){
 
 #current-order-outer a {
   text-decoration: none;
-  color: var(--main-green-color);
+  color: var(--main-blue-color);
 }
 
 #current-order-outer a:hover {
   text-decoration: none;
-  color: var(--main-green-color);
+  color: var(--main-blue-color);
 }
 
 .previous-order-inner {
@@ -423,7 +416,7 @@ input[type="submit"]){
 #curr-order-tooltip {
   opacity: 0;
   position: absolute;
-  top: 67%;
+  top: 70%;
   left: 3px;
   width: 245px;
 	background-color: rgba(0,0,0,0.7);
@@ -440,7 +433,7 @@ input[type="submit"]){
 .prev-order-tooltip {
   opacity: 0;
   position: absolute;
-  top: 74%;
+  top: 76.5%;
   left: 3px;
   width: 245px;
 	background-color: rgba(0,0,0,0.7);
@@ -452,6 +445,10 @@ input[type="submit"]){
 	font-size: 1rem;
   text-align: center;
   transition: 0.3s;
+}
+
+#order-now-btn {
+  font-weight: bold;
 }
 
 .store-location-container {
@@ -498,9 +495,11 @@ input[type="submit"]){
 }
 
 .order-item input[type='image'] {
+  display: block;
   width: 100%;
   height: 100%;
   cursor: default;
+  border-radius: 4px;
 }
 
 .order-item:hover .item-details {
@@ -555,8 +554,8 @@ input[type="submit"]){
 	width: 100%;
 	height: 40px;
 	background-color: var(--main-white-color);
-	color: var(--main-green-color);
-	border: 2px solid var(--main-green-color);
+	color: var(--main-blue-color);
+	border: 2px solid var(--main-blue-color);
 	border-radius: 4px;
 	font-size: 1rem;
 	font-weight: bold;
@@ -566,7 +565,7 @@ input[type="submit"]){
 
 #order-completed-btn:hover,
 .remove-order-btn:hover {
-	background-color: var(--main-green-color);
+	background-color: var(--main-blue-color);
 	color: var(--main-white-color);
 }
 
@@ -663,15 +662,15 @@ input[type="submit"]){
 }
 
 #modal-inner-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    background-color: rgb(229, 232, 232);
-    width: 450px;
-    height: 350px;
-    border-radius: 5px;
-    z-index: 2;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: var(--main-white-color);
+  width: 450px;
+  height: 350px;
+  border-radius: 5px;
+  z-index: 2;
 }
 
 #modal-inner-content {
@@ -711,14 +710,16 @@ input[type="submit"]){
 #edit-submit-btn {
   width: 100%;
   padding: 8px;
-  border: 2px solid var(--main-green-color);
+  border: 2px solid var(--main-blue-color);
   border-radius: 4px;
-  background-color: rgb(229, 232, 232);
+  background-color: var(--main-blue-color);
   font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 
 #edit-submit-btn:hover {
-  background-color: var(--main-green-color);
+  background-color: var(--main-blue-color);
   color: rgb(229, 232, 232);
 }
 
@@ -798,7 +799,7 @@ select option {
 }
 
 .mail-icon:hover {
-  border: 1px solid var(--main-green-color);
+  border: 1px solid var(--main-blue-color);
 }
 
 .close-bar-one {
@@ -838,7 +839,7 @@ select option {
   cursor: pointer;
 }
 .close-box:hover {
-  border: 1px solid var(--main-green-color);
+  border: 1px solid var(--main-blue-color);
 }
 
 .toggle-move-up {
@@ -916,11 +917,11 @@ select option {
 
 .toggle-view-convo {
   border: 1px solid rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 10px var(--main-green-color);
+  box-shadow: inset 0 0 10px var(--main-blue-color);
 }
 .view-convo:hover {
   border: 1px solid rgba(0,0,0,0.4);
-  box-shadow: inset 0 0 10px var(--main-green-color);
+  box-shadow: inset 0 0 10px var(--main-blue-color);
 }
 .new-msg-alert {
   display: none;
@@ -978,7 +979,7 @@ select option {
   border-radius: 10px;
 }
 .received-msg {
-  background-color: var(--main-green-color);
+  background-color: var(--main-blue-color);
   color: white;
 }
 
@@ -1102,9 +1103,9 @@ select option {
   overflow-x: auto;
 }
 
-.delivery-item {
+.order-item {
   position: relative;
-  width: 246px;
+  width: 255px;
   border: 1px solid rgba(0,0,0,0.2);
   border-radius: 4px;
   padding: 10px;
@@ -1112,31 +1113,31 @@ select option {
   height: auto;
   overflow-y: hidden;
 }
-.delivery-item .hidden-checkbox {
+.order-item .hidden-checkbox {
   display: none;
 }
-.delivery-item img {
+.order-item img {
   display: block;
   width: 100%;
   height: 100%;
 }
 .item-details {
-  width: 91%;
+  width: 93%;
   position: absolute;
   top: 275%;
   left: 50%;
   transform: translate(-50%,-50%);
   padding: 5px 0;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.9);
   font-size: 0.85rem;
   font-weight: bold;
   transition: 0.5s;
   text-align: center;
 }
 
-.delivery-item:hover .item-details {
+.order-item:hover .item-details {
   position: absolute;
-  top: 72%;
+  top: 74%;
 }
 
 .delivery-btns-container {
@@ -1158,11 +1159,11 @@ select option {
 }
 
 .delivery-completed-btn {
-  border: 1px solid var(--main-green-color);
-  color: var(--main-green-color);
+  border: 1px solid var(--main-blue-color);
+  color: var(--main-blue-color);
 }
 .delivery-completed-btn:hover {
-  background-color: var(--main-green-color);
+  background-color: var(--main-blue-color);
   color: white;
 }
 
@@ -1443,7 +1444,7 @@ select option {
     padding: 0;
     padding-bottom: 20px;
   }
-  .delivery-item {
+  .order-item {
     width: 220px;
   }
   .item-details {
