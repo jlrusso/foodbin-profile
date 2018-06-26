@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	<title>Profile | Foodbin</title>
+	<title>Gogobin | Profile</title>
 </head>
 <body>
   <?php
@@ -23,7 +23,7 @@
   ?>
 	<div id="body-wrapper">
 		<nav>
-        <div id="brand-logo"><a href="foodbin.php"><b>Foodbin</b></a></div>
+        <div id="brand-logo"><a href="foodbin.php"><b>Gogobin</b></a></div>
          <div id="horizontal-nav">
             <ul>
                 <?php
@@ -98,7 +98,7 @@
                   }
                 }
               } else {
-                echo "<input type='image' src='../img/user-icon.png'>";
+                echo "<input type='image' src='..foodbin/img/user-icon.png'>";
               }
             ?>
 					</div>
@@ -140,7 +140,7 @@
                 }
                 if($resultRows < 1){
                   echo "<h3 style='text-align: center'>No orders at this time</h3>";
-                  echo "<p style='text-align: center'><a href='foodbin.php'>Order Now</a></p>";
+                  echo "<p style='text-align: center'><a href='foodbin.php' id='order-now-btn'>Order Now</a></p>";
                 } else {
                   for($orderRow = 0; $orderRow < $resultRows; $orderRow++){
                     $itemIdsString = $currData[$orderRow]['food_ids'];
