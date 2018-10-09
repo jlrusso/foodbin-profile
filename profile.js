@@ -1,7 +1,44 @@
+const headerObj = {
+  init: function(){
+    this.cacheDom();
+    this.bindEvents();
+  },
+  cacheDom: function(){
+    this.userIcon = document.getElementsByClassName("fa-user")[0];
+    this.userMenu = document.getElementsByClassName("user-menu")[0];
+    this.goHomeBtn = document.getElementById("go-home-btn");
+    this.logoutBtn = document.getElementById("logout-btn");
+    this.logoutSubmit = document.getElementById("logout-submit");
+  },
+  bindEvents: function(){
+    this.userIcon.addEventListener("click", this.showUserMenu.bind(this));
+    this.goHomeBtn.addEventListener("click", this.redirectToHome.bind(this));
+    this.logoutBtn.addEventListener("click", this.logOutHandler.bind(this));
+  },
+  showUserMenu: function(){
+    if(this.userMenu.style.display === "block"){
+      this.userMenu.style.display = "none";
+    } else {
+      this.userMenu.style.display = "block"
+    }
+  },
+  redirectToHome: function(){
+    document.getElementById("home-anchor").click();
+  },
+  logOutHandler: function(){
+    this.logoutSubmit.click();
+  }
+}
+headerObj.init();
+
+
+
+
 var imageContainer = document.getElementById("image-container"),
  		inputFileElement = document.getElementById("file-input"),
  		changePicBtn = document.getElementById("change-pic-btn"),
-		uploadPicBtn = document.getElementById("upload-pic-btn");
+    uploadPicBtn = document.getElementById("upload-pic-btn");
+    
 changePicBtn.addEventListener("click", function(){
 	inputFileElement.click();
 	changePicBtn.style.display = "none";
@@ -35,40 +72,38 @@ for(let i = 0; i < modalWindows.length; i++){
 }
 
 /*--- Start of User Icon JS --*/
-    var userIcon = document.getElementsByClassName("fa-user")[0],
-        userList = document.getElementsByClassName("user-list")[0];
-        username = document.getElementById("user");
-        userParent = document.getElementById("user-parent");
-        if(userIcon){
-            userIcon.addEventListener("click", function(){
-                userList.classList.toggle("show-user-list");
-            });
-        }
+    // var userIcon = document.getElementsByClassName("fa-user")[0],
+    //     userList = document.getElementsByClassName("user-menu")[0];
+    //     if(userIcon){
+    //         userIcon.addEventListener("click", function(){
+    //             userList.classList.toggle("show-user-menu");
+    //         });
+    //     }
 
-    var goHomeBtn = document.getElementById("go-home-btn");
-    if(goHomeBtn){
-      goHomeBtn.addEventListener("click", function(){
-        document.getElementById("home-anchor").click();
-      })
-    }
+    // var goHomeBtn = document.getElementById("go-home-btn");
+    // if(goHomeBtn){
+    //   goHomeBtn.addEventListener("click", function(){
+    //     document.getElementById("home-anchor").click();
+    //   })
+    // }
 
-    window.addEventListener("click", function(e){
-        if(userIcon){
-            if(!e.target.matches(".fa-user")){
-                if(userList.classList.contains("show-user-list")){
-                    userList.classList.remove("show-user-list");
-                }
-            }
-        }
-    });
+    // window.addEventListener("click", function(e){
+    //     if(userIcon){
+    //         if(!e.target.matches(".fa-user")){
+    //             if(userList.classList.contains("show-user-menu")){
+    //                 userList.classList.remove("show-user-menu");
+    //             }
+    //         }
+    //     }
+    // });
 
-    var logoutBtn = document.getElementById("logout-btn"),
-        logoutSubmit = document.getElementById("logout-submit");
-    if(logoutBtn){
-      logoutBtn.addEventListener("click", function(){
-        logoutSubmit.click();
-      })
-    }
+    // var logoutBtn = document.getElementById("logout-btn"),
+    //     logoutSubmit = document.getElementById("logout-submit");
+    // if(logoutBtn){
+    //   logoutBtn.addEventListener("click", function(){
+    //     logoutSubmit.click();
+    //   })
+    // }
 /*--- End of User Icon JS ---*/
 
 var notificationsBtn = document.getElementById("my-notifications-btn"),
@@ -338,7 +373,7 @@ function getNewNotifications(){
 
 function checkNewNotifications(){
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "includes/checkNewNotifications.php", true);
+  xhr.open("GET", "../includes/checkNewNotifications.php", true);
   xhr.onload = function(){
     if(this.status == 200){
       var data = this.responseText;
