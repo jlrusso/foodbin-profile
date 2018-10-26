@@ -1,0 +1,292 @@
+.col-8 {
+	position: relative;
+	width: 75%;
+	height: 100%;
+	background-color: var(--main-white-color);
+	overflow-y: auto;
+	-ms-overflow-y: auto;
+}
+.line-divider {
+	width: 90%;
+	height: 2px;
+	background-color: rgba(0,0,0,0.1);
+  border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	margin: 30px auto;
+}
+#previous-orders-heading {
+	text-align: center;
+}
+#previous-orders-heading {
+  margin-top: 0px;
+}
+.previous-order-outer {
+	position: relative;
+	margin: auto;
+  padding-right: 4px;
+	width: 95%;
+	height: auto;
+	overflow-x: auto;
+	-ms-overflow-x: auto;
+  overflow-y: hidden;
+	-ms-overflow-y: hidden;
+}
+.previous-order-inner {
+  position: relative;
+}
+.prev-order-tooltip {
+  opacity: 0;
+  position: absolute;
+  top: 76.5%;
+  left: 3px;
+  width: 245px;
+	background-color: rgba(0,0,0,0.7);
+	color: white;
+	border: 2px solid rgba(0,0,0,0);
+	border-radius: 4px;
+	user-select: none;
+  -webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+  line-height: 36px;
+	font-size: 1rem;
+  text-align: center;
+  transition: 0.3s;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
+}
+.store-location-container {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 7px;
+}
+.order-store-name,
+.order-store-address,
+.order-store-city,
+.order-store-date {
+  text-align: center;
+  line-height: 30px;
+  border: 1px solid rgba(0,0,0,0.25);
+  border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
+.previous-order-row {
+	display: grid;
+  grid-template-columns: repeat(400, 1fr);
+  grid-column-gap: 7px;
+  position: relative;
+  width: 100%;
+	height: auto;
+  padding: 5px 0 10px;
+  overflow-x: auto;
+	-ms-overflow-x: auto;
+  overflow-y: hidden;
+	-ms-overflow-y: hidden;
+}
+.order-item {
+  position: relative;
+  display: inline-block;
+  width: 258.5px;
+  height: 185px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  overflow: hidden;
+}
+.order-item input[type='image'] {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+.order-item .item-details {
+  width: 95%;
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	-moz-transform: translate(-50%,-50%);
+	-ms-transform: translate(-50%,-50%);
+	-o-transform: translate(-50%,-50%);
+  padding: 5px 0;
+  background-color: #fff;
+  border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: 0.3s;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
+  text-align: center;
+}
+.order-item:hover .item-details {
+  position: absolute;
+  top: 75.5%;
+}
+.previous-order-footer {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+	-webkit-transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	-o-transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 10px;
+	margin: 10px 0 0;
+  width: 500px;
+	height: auto;
+	text-align: center;
+}
+.remove-prev-form,
+.order-again-form {
+  display: none;
+}
+.order-again-btn {
+	width: 100%;
+	height: 40px;
+	background-color: var(--main-white-color);
+	color: rgb(23,105,255);
+	border: 2px solid rgb(23,105,255);
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 0.2s;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	-o-transition: 0.2s;
+}
+.order-again-btn:hover {
+	background-color: rgb(23,105,255);
+	color: var(--main-white-color);
+}
+.remove-order-btn {
+	width: 100%;
+	height: 40px;
+	background-color: var(--main-white-color);
+	color: var(--main-blue-color);
+	border: 2px solid var(--main-blue-color);
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: 0.2s;
+	-webkit-transition: 0.2s;
+	-moz-transition: 0.2s;
+	-o-transition: 0.2s;
+}
+.remove-order-btn:hover {
+	background-color: var(--main-blue-color);
+	color: var(--main-white-color);
+}
+
+/* Start of Media Styling */
+@media screen and (max-width: 1250px){
+  .col-8 {
+    display: block;
+  	position: relative;
+  	width: 100%;
+  	height: auto;
+  	background-color: var(--main-white-color);
+  	overflow-y: auto;
+		-ms-overflow-y: auto;
+  }
+	.order-item {
+		width: 270px;
+	}
+}
+@media screen and (max-width: 900px){
+  .store-location-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .store-location-container div {
+    margin-bottom: 7px;
+  }
+}
+@media screen and (max-width: 725px){
+  .previous-order-outer {
+    width: 100%;
+    padding-right: 0;
+  }
+}
+@media screen and (max-width: 630px){
+  .previous-order-footer {
+    left: 0;
+    width: 100%;
+    transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+  }
+}
+@media screen and (max-width: 475px){
+  .store-location-container {
+    display: block;
+  }
+  .store-location-container div {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 425px){
+  #previous-orders-heading {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 360px){
+  .order-item {
+    width: 262px;
+  }
+}
+@media screen and (max-width: 345px){
+  .order-item {
+    width: 220px;
+  }
+  .item-details {
+    font-size: 0.7rem;
+    border: 0;
+  }
+  .previous-order-footer {
+    grid-column-gap: 5px;
+  }
+  .previous-order-footer button {
+    font-size: 0.85rem !important;
+  }
+  #previous-orders-heading {
+    font-size: 1.1rem;
+  }
+}
+@media screen and (max-width: 325px){
+  .order-item {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 325px) and (max-height: 570px){
+  .order-item {
+    width: 280px
+  }
+}
