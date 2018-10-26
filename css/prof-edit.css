@@ -1,0 +1,90 @@
+/*--- Edit Modal ---*/
+#edit-modal-window {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  cursor: pointer;
+  z-index: 5;
+}
+#edit-modal-wrapper {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  background-color: var(--main-white-color);
+  width: 450px;
+  max-width: 95%;
+  height: auto;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  z-index: 6;
+}
+#edit-modal-content {
+  width: 100%;
+  height: 65%;
+  margin-top: 20px;
+  padding: 0 10px 10px;
+}
+#close-edit-modal-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+#edit-modal-content h3 {
+  text-align: center;
+}
+#edit-modal-wrapper input[type="text"],
+#edit-modal-wrapper input[type="email"],
+#edit-modal-wrapper select {
+  color: #333;
+	width: 100%;
+	padding: 12px;
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+	margin: 10px 0 0;
+	outline: none;
+}
+#edit-modal-wrapper [type="text"]:focus,
+#edit-modal-wrapper [type="email"]:focus,
+#edit-modal-wrapper select:focus {
+  border-color: #66afe9;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+  -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+}
+#edit-submit-btn {
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  background-color: rgb(0,128,255);
+  border: 2px solid rgb(0,128,255);
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+}
+select option {
+	color: black;
+}
