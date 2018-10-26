@@ -1,0 +1,291 @@
+/*-- My Deliveries --*/
+#deliveries-modal-window {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 5;
+  cursor: pointer;
+}
+#deliveries-modal-wrapper {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  width: 85%;
+  height: auto;
+  overflow-y: auto;
+  -ms-overflow-y: auto;
+  background-color: var(--main-white-color);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  z-index: 6;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+}
+#deliveries-modal-wrapper::-webkit-scrollbar {
+  display: none;
+}
+#deliveries-modal-content {
+  position: relative;
+}
+#close-deliveries-btn {
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+#deliveries-modal-content h2 {
+  text-align: center;
+}
+#deliveries-modal-content p {
+  text-align: center;
+}
+.store-grid {
+  width: 95%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+}
+.store-grid span {
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+}
+.delivery-order-outer {
+  width: 95%;
+  padding-bottom: 5px;
+  margin: 0 auto 10px;
+  height: auto;
+  overflow-y: hidden;
+  -ms-overflow-y: hidden;
+}
+.delivery-order-outer::-webkit-scrollbar {
+  height: 10px;
+}
+.delivery-order-outer::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background: var(--main-blue-color);
+}
+.delivery-order-inner {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 10px;
+  margin: 7px 0 0;
+  padding-bottom: 10px;
+}
+.delivery-item {
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  padding: 10px;
+  float: left;
+  height: auto;
+  overflow-y: hidden;
+  -ms-overflow-y: hidden;
+}
+.delivery-item .hidden-checkbox {
+  display: none;
+}
+.delivery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.delivery-item .item-details {
+  width: 95%;
+  position: absolute;
+  top: 130%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  padding: 5px 0;
+  background-color: #fff;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  text-align: center;
+}
+.delivery-item:hover .item-details {
+  position: absolute;
+  top: 73%;
+}
+.delivery-btns-container {
+  width: 60%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 10px;
+  margin: auto;
+}
+.delivery-cancel-btn,
+.delivery-completed-btn {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  background-color: transparent;
+  padding: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.delivery-completed-btn {
+  border: 1px solid var(--main-blue-color);
+  color: var(--main-blue-color);
+}
+.delivery-completed-btn:hover {
+  background-color: var(--main-blue-color);
+  color: white;
+}
+.delivery-cancel-btn {
+  border: 1px solid rgba(0,0,0,0.5);
+  color: rgba(0,0,0,0.5);
+}
+.delivery-cancel-btn:hover {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+}
+.delivery-msg-form {
+  width: 60%;
+  height: auto;
+  margin: 10px auto 0;
+  transition: 0.4s;
+  -webkit-transition: 0.4s;
+  -moz-transition: 0.4s;
+  -o-transition: 0.4s;
+  display: grid;
+  grid-template-columns: 85% 15%;
+}
+.delivery-msg-form input {
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,0.3);
+}
+.delivery-msg-form input[type="text"] {
+  border-radius: 4px 0 0 4px;
+  -webkit-border-radius: 4px 0 0 4px;
+  -moz-border-radius: 4px 0 0 4px;
+}
+.delivery-msg-submit {
+  border: 1px solid rgba(0,0,0,0.3);
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  -webkit-border-radius: 0 4px 4px 0;
+  -moz-border-radius: 0 4px 4px 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+.delivery-msg-form input[type='text']:focus,
+.delivery-msg-submit:focus {
+  outline: none;
+}
+.delivery-line-divider {
+  width: 80%;
+  height: 2px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  background-color: rgba(0,0,0,0.6);
+  margin: 25px auto;
+}
+
+/* Start of Media Styling */
+@media screen and (max-width: 1200px){
+  #deliveries-modal-wrapper {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 1070px){
+  .delivery-item {
+    width: 240px;
+  }
+}
+@media screen and (max-width: 900px){
+  #deliveries-modal-wrapper {
+    top: 20px !important;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%); translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+  }
+}
+@media screen and (max-width: 785px){
+  .store-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .store-grid span {
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 725px){
+  .delivery-msg-form {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 550px){
+  #deliveries-modal-wrapper {
+    top: 10px !important;
+    width: 95%;
+  }
+  .delivery-msg-form,
+  .delivery-btns-container {
+    width: 95%;
+  }
+  .store-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 410px){
+  .delivery-msg-form {
+    grid-template-columns: 80% 20%;
+  }
+}
+@media screen and (max-width: 400px){
+  .store-grid {
+    display: block;
+  }
+  .store-grid span {
+    display: block;
+    width: 100%;
+    padding: 7px;
+  }
+}
+@media screen and (max-width: 850px) and (max-height: 450px){
+  #deliveries-modal-container {
+    max-height: 91%;
+  }
+}
