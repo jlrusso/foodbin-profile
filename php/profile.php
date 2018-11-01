@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include_once "includes/dbh-inc.php";
+  include_once "../includes/dbh-inc.php";
 ?>
 
 <!DOCTYPE html>
@@ -9,10 +9,18 @@
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="../css/profile.css"/>
+    <link rel="stylesheet" href="../css/prof-header.css"/>
+    <link rel="stylesheet" href="../css/curr-order.css"/>
+    <link rel="stylesheet" href="../css/prev-orders.css"/>
+    <link rel="stylesheet" href="../css/prof-convos.css"/>
+    <link rel="stylesheet" href="../css/prof-deliveries.css"/>
+    <link rel="stylesheet" href="../css/prof-notis.css"/>
+    <link rel="stylesheet" href="../css/profile-edit.css"/>
+    <link rel="stylesheet" href="../css/prof-edit.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-	<title>Profile | Foodbin</title>
+	<title>Gogobin | Profile</title>
 </head>
 <body>
   <?php
@@ -23,7 +31,7 @@
   ?>
 	<div id="body-wrapper">
 		<nav>
-        <div id="brand-logo"><a href="foodbin.php"><b>Foodbin</b></a></div>
+        <div id="brand-logo"><a href="../homepage/foodbin.php"><b>Gogobin</b></a></div>
          <div id="horizontal-nav">
             <ul>
                 <?php
@@ -53,16 +61,16 @@
 
                   if (isset($_SESSION['user_id'])){
                     echo '<li><i class="fa fa-user"></i>
-                            <ul class="user-list">
+                            <ul class="user-menu">
                               <li id="signed-in-as">Signed in as: &nbsp; <b>' . $_SESSION["user_username"] . '</b></li>
-                              <li id="go-home-btn"><i class="fa fa-home"></i> &nbsp;Home<a href="foodbin.php" id="home-anchor"></a></li>
+                              <li id="go-home-btn"><i class="fa fa-home"></i> &nbsp;Home<a href="../homepage/foodbin.php" id="home-anchor"></a></li>
                               <li id="my-deliveries"><i class="fa fa-truck"></i> &nbsp;My Deliveries</li>
                               <li id="my-notifications-btn"><i class="fa fa-bell-o"></i> &nbsp;Notifications  <span id="noti-badge">!</span></li>
                               <li id="my-conversations-btn"><i class="fa fa-comments-o"></i> &nbsp;Conversations <span id="convo-badge">!</span></li>
                               <li id="logout-btn"><i class="fa fa-sign-out"></i>&nbsp; Logout</li>
                             </ul>
                           </li>
-                          <form action="includes/logout-inc.php" method="POST" id="logout-form">
+                          <form action="../includes/logout-inc.php" method="POST" id="logout-form">
                             <input type="submit" name="submit" value="Logout" id="logout-submit"/>
                           </form>
                           ';
@@ -89,16 +97,16 @@
                   while($row = mysqli_fetch_assoc($result)){
                     $id = $row['user_id'];
                     if($row['img_status'] == 0){
-                      $fileName = "uploads/profile".$id."*";
+                      $fileName = "../uploads/profile".$id."*";
                       $allFiles = glob($fileName);
                       $fileArr = explode(".", $allFiles[0]);
                       $fileExt = strtolower($fileArr[1]);
-                      echo "<input type='image' src='uploads/profile".$id.".".$fileExt."?".mt_rand()."' id='profile-pic'/>";
+                      echo "<input type='image' src='../uploads/profile".$id.".".$fileExt."?".mt_rand()."' id='profile-pic'/>";
                     }
                   }
                 }
               } else {
-                echo "<input type='image' src='../img/user-icon.png'>";
+                echo "<input type='image' src='..img/user-icon.png'>";
               }
             ?>
 					</div>
@@ -114,7 +122,7 @@
 						<div class="user-info-inner">
 							<?php
 								echo
-                  "<ul id='user-list'>
+                  "<ul id='user-menu'>
   									<li><span id='profile-name'>Name: </span> " . $_SESSION['user_first'] . " " .  $_SESSION['user_last'] . "</li>" .
   									"<li><span id='profile-email'>Email: </span>" . $_SESSION['user_email'] . "</li>" .
   									"<li id='user-city'><span id='profile-city'>City: </span>" . $_SESSION['user_city']. "</li>" .
@@ -140,14 +148,12 @@
                 }
                 if($resultRows < 1){
                   echo "<h3 style='text-align: center'>No orders at this time</h3>";
-                  echo "<p style='text-align: center'><a href='foodbin.php'>Order Now</a></p>";
+                  echo "<p style='text-align: center'><a href='foodbin.php' id='order-now-btn'>Order Now</a></p>";
                 } else {
                   for($orderRow = 0; $orderRow < $resultRows; $orderRow++){
                     $itemIdsString = $currData[$orderRow]['food_ids'];
                     $itemArr = explode(" ", $itemIdsString);
-                    //array_shift($itemArr);
                     array_pop($itemArr);
-                    //print_r($itemArr);
                     $itemArrLength = count($itemArr);
                     echo "
                       <div class='store-location-container'>
@@ -174,7 +180,7 @@
                       $specsArr = explode(" | ", $specStr);
                       echo "
                         <div class='order-item'>
-                          <input type='image' src='../foodbin/img/image". $itemArr[$col] . ".jpg'/>
+                          <input type='image' src='../img/image". $itemArr[$col] . ".jpg'/>
                           <div class='item-details'>
                             " . $specsArr[0] . "<br/>" . $specsArr[1] . "<br/>" . $specsArr[2] . "<br/>" . $specsArr[3] . "
                           </div>
@@ -189,7 +195,7 @@
                       <form action='includes/orderCompleted.php' method='POST' id='order-completed-form'>
                         <input type='submit' name='submit' id='order-complete-submit'/>
                       </form>
-                      <form action='includes/cancelOrder.php' method='POST' id='cancel-order-form'>
+                      <form action='../includes/cancelOrder.php' method='POST' id='cancel-order-form'>
                         <input type='submit' name='submit' id='cancel-order-submit'/>
                       </form>
                     ";
@@ -267,7 +273,7 @@
                         $specsArr = explode(" | ", $specStr);
                         echo "
                           <div class='order-item'>
-                            <input type='image' src='../foodbin/img/image". $itemArr[$col] . ".jpg'/>
+                            <input type='image' src='../img/image". $itemArr[$col] . ".jpg'/>
                             <div class='item-details'>
                               " . $specsArr[0] . "<br/>" . $specsArr[1] . "<br/>" . $specsArr[2] . "<br/>" . $specsArr[3] . "
                             </div>
@@ -325,7 +331,7 @@
                         $specsArr = explode(" | ", $specStr);
                         echo "
                           <div class='order-item'>
-                            <input type='image' src='../foodbin/img/image". $itemArr[$col] . ".jpg'/>
+                            <input type='image' src='../img/image". $itemArr[$col] . ".jpg'/>
                             <div class='item-details'>
                               " . $specsArr[0] . "<br/>" . $specsArr[1] . "<br/>" . $specsArr[2] . "<br/>" . $specsArr[3] . "
                             </div>
